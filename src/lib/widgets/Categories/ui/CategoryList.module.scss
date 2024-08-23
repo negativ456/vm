@@ -1,0 +1,16 @@
+.wrapper {
+    margin: 0 var(--margin-width);
+  h2 {
+    font-feature-settings: "liga" off;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 40px; /* 125% */
+    letter-spacing: -0.32px;
+    margin-bottom: 32px;
+  }
+  .list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 32px 89px;
+  }
+}

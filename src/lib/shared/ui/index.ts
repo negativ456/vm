@@ -1,0 +1,7 @@
+export { Logo } from './Logo'
+export { PrimaryBtn } from './PrimaryBtn'
+export { LocationUI } from './LocationUI'
+export { DesignedSelect } from './DesignedSelect'
+export { Price } from './Price'
+export { FavouriteBtn } from './FavouriteBtn'
+export {Rating} from './Rating'

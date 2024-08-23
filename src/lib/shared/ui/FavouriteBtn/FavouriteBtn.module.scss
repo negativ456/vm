@@ -1,0 +1,14 @@
+.btn {
+    position: relative;
+    cursor: pointer;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    background-color: white;
+    border-radius: 8px;
+}
+.btn:hover {
+    opacity: 0.8;
+  }

@@ -1,0 +1,18 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --primary-color: #0181EF;
+  --font-color: #1A1A1A;
+  --margin-width: 42px;
+}
+
+html {
+  font-family: var(--font-golos-text);
+  font-size: 14px;
+  color: var(--font-color);
+  line-height: 20px;
+}

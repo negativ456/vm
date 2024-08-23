@@ -1,0 +1,13 @@
+.menu {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 32px;
+  margin: 0 var(--margin-width) 32px var(--margin-width);
+  .link {
+    text-decoration: none;
+    color: var(--font-color);
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

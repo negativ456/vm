@@ -1,0 +1,48 @@
+.wrapper {
+  $image-height: 320px;
+  $image-width: 320px;
+
+  flex-shrink: 0;
+  cursor: pointer;
+  position: relative;
+  height: $image-height;
+  width: $image-width;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+
+  .background {
+    position: absolute;
+    height: $image-height;
+    width: $image-width;
+    top: 0;
+    left: 0;
+    border-radius: 16px;
+  }
+
+  .priceFav {
+    display: flex;
+    justify-content: right;
+    gap: 8px;
+  }
+
+  p,
+  h3 {
+    color: white;
+    position: relative;
+  }
+
+  h3 {
+    font-feature-settings: "liga" off;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    letter-spacing: -0.24px;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 20px; /* 150% */
+  }
+}

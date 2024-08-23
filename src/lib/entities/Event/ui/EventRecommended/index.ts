@@ -1,0 +1,1 @@
+export {EventRecommended} from './EventRecommended'
