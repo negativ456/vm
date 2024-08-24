@@ -6,7 +6,7 @@ export function EventsList() {
   return (
     <div className={classes.list}>
       {eventsDB.map((event, index) => (
-        <EventCard event={event} />
+        <EventCard event={event} key={index}/>
       ))}
     </div>
   );

@@ -24,8 +24,8 @@ export function EventCard({ event }: { event: EventType }) {
           <span>{event.creator.fullname}</span>
           <Rating rating={event.rating}/>
         </div>
-        <span>{event.location}</span>
-        <span>{event.datetime.toString()}</span>
+        <div>{event.location}</div>
+        <div>{event.datetime.toLocaleDateString()}</div>
       </div>
     </article>
   );

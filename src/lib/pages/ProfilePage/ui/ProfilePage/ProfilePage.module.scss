@@ -1,0 +1,86 @@
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+.profile {
+  display: flex;
+  gap: 32px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  h3 {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 40px; /* 125% */
+    letter-spacing: -0.32px;
+  }
+}
+
+.content_ad {
+  display: flex;
+  gap: 24px;
+  span {
+    font-weight: 600;
+    font-size: 16px;
+  }
+}
+
+.work {
+  font-size: 16px;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.events {
+  margin-top: 48px;
+  h2 {
+    margin-bottom: 32px;
+    font-size: 32px;
+    font-weight: 600;
+  }
+}
+
+.container {
+  margin: 0 var(--margin-width);
+}
+
+.interests {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .interest {
+    display: flex;
+    height: 32px;
+    justify-content: center;
+    align-items: center;
+    padding: 6px 8px;
+    border-radius: 8px;
+    border: var(--0, 1px) solid var(--black-20, #CCC);
+  }
+}
+
+.add_btn {
+  border-radius: 8px;
+  padding: 10px 16px;
+  background: var(--primary-50, #0181EF);
+  font-size: 16px;
+  color: #FFF;
+}
+
+.write_btn {
+  border-radius: 8px;
+  padding: 10px 16px;
+  background: var(--primary-50, #E6F2FD);
+  font-size: 16px;
+  color: #0181EF;
+}
