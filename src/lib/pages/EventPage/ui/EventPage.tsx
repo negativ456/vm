@@ -125,8 +125,8 @@ const EventPage = () => {
                                 <div className={cls.review_date}>
                                     <p>1 июня 2024</p>
                                     <div>
-                                        {[1,2,3,4,5].map(() => (
-                                            <Image src={star} alt={"star"}></Image>
+                                        {[1,2,3,4,5].map((el) => (
+                                            <Image src={star} alt={"star"} key={el}></Image>
                                         ))}
                                     </div>
                                 </div>
