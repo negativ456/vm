@@ -3,7 +3,7 @@ import ProfilePage from "@/lib/pages/ProfilePage/ui/ProfilePage/ProfilePage";
 
 const Page = () => {
     return (
-        <ProfilePage></ProfilePage>
+        <ProfilePage isCreator={false}></ProfilePage>
     );
 };
 

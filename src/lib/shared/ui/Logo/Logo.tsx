@@ -1,5 +1,6 @@
 import classes from "./Logo.module.scss";
+import Link from "next/link";
 
 export function Logo() {
-  return <h1 className={classes.title}>вМесте</h1>;
+  return <Link href={"/"} className={classes.title}>вМесте</Link>;
 }

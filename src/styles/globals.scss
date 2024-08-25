@@ -7,7 +7,7 @@
 :root {
   --primary-color: #0181EF;
   --font-color: #1A1A1A;
-  --margin-width: 42px;
+  --margin-width: 80px;
 }
 
 html {
@@ -25,4 +25,10 @@ html {
 button {
   border: none;
   outline: none;
+  cursor: pointer;;
+}
+
+a {
+  text-decoration: none;
+  color: var(--font-color);
 }
