@@ -2,6 +2,7 @@ import { Logo, PrimaryBtn } from "@/lib/shared";
 import { LocationUI } from "@/lib/shared";
 import classes from "./Header.module.scss";
 import { SearchField } from "@/lib/features";
+import Link from "next/link";
 
 export function Header() {
   return (
@@ -9,7 +10,9 @@ export function Header() {
       <Logo />
       <LocationUI />
       <SearchField />
-      <PrimaryBtn text="Войти"/>
+        <Link href={"/profile"}>
+            <PrimaryBtn text="Войти"/>
+        </Link>
     </header>
   );
 }
