@@ -1,8 +1,15 @@
 .wrapper {
-  margin-top: 48px;
   padding: 48px var(--margin-width);
   border-radius: 64px 64px var(--0, 0px) var(--0, 0px);
-  background: var(--surfaces-30, linear-gradient(0deg, rgba(103, 80, 164, 0.05) 0%, rgba(103, 80, 164, 0.05) 100%), #FFF);
+  background: var(
+    --surfaces-30,
+    linear-gradient(
+      0deg,
+      rgba(103, 80, 164, 0.05) 0%,
+      rgba(103, 80, 164, 0.05) 100%
+    ),
+    #fff
+  );
 }
 
 .column {

@@ -9,7 +9,7 @@ export function Header() {
     <header className={classes.header}>
       <Logo />
       <LocationUI />
-      <SearchField />
+      <SearchField height="44px"/>
         <Link href={"/profile"}>
             <PrimaryBtn text="Войти"/>
         </Link>

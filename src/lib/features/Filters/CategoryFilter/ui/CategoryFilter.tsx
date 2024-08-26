@@ -1,19 +1,17 @@
-import { DesignedSelect } from '@/lib/shared'
-import classes from './CategoryFilter.module.scss'
+import { DesignedSelect } from "@/lib/shared";
+import classes from "./CategoryFilter.module.scss";
 
 export function CategoryFilter() {
-    const categories = [
-        'Культурные',
-        'Культурные',
-        'Культурные',
-        'Культурные',
-        'Культурные',
-        'Культурные',
-        'Культурные',
-        'Культурные',
-    ]
+  const categories = [
+    "Культурные",
+    "Культурные",
+    "Культурные",
+    "Культурные",
+    "Культурные",
+    "Культурные",
+    "Культурные",
+    "Культурные",
+  ];
 
-    return (
-        <DesignedSelect options={categories} description='Категория'/>
-    )
+  return <DesignedSelect options={categories} description="Категория" width="128px"/>;
 }

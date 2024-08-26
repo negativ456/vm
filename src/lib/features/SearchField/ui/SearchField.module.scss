@@ -1,9 +1,8 @@
-.input {
+.wrapper {
+  position: relative;
   flex: 1;
-    padding: 0 12px;
-    height: 44px;
-  border: none;
   border-radius: 8px;
+  width: fit-content;
   background: var(
     --surfaces-40,
     linear-gradient(
@@ -13,9 +12,30 @@
     ),
     #fff
   );
-}
-.input::-webkit-search-cancel-button {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  input {
+    border-radius: 8px;
+    padding-left: 40px;
+    height: 100%;
+    border: none;
+    background: var(
+      --surfaces-40,
+      linear-gradient(
+        0deg,
+        rgba(103, 80, 164, 0.08) 0%,
+        rgba(103, 80, 164, 0.08) 100%
+      ),
+      #fff
+    );
+  }
+  input::-webkit-search-cancel-button {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+  .searchIcon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 12px;
+  }
 }

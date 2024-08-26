@@ -3,6 +3,7 @@ import "@/styles/globals.scss";
 import { Header, Menu } from "@/lib/widgets";
 import { inter, golos_text } from "@/fonts";
 import Footer from "@/lib/widgets/Footer/ui/Footer/Footer";
+import classes from "./Layout.module.scss";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,10 +18,12 @@ export default function RootLayout({
   return (
     <html lang="ru" className={`${inter.variable} ${golos_text.variable}`}>
       <body>
-        <Header />
-        <Menu />
-        {children}
-        <Footer/>
+        <div className={classes.appWrapper}>
+          <Header />
+          <Menu />
+          <main>{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );

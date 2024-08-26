@@ -2,10 +2,10 @@ import { CategoryList, MainEvents, RecommendedEvents } from "@/lib/widgets";
 
 export default function Home() {
   return (
-    <main>
+    <div>
       <RecommendedEvents />
       <CategoryList />
-      <MainEvents/>
-    </main>
+      <MainEvents />
+    </div>
   );
 }
