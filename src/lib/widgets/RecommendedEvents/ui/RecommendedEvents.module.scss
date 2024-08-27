@@ -1,10 +1,12 @@
 .wrapper {
+  margin: 0 var(--margin-width) 40px var(--margin-width);
+  .title {
+    display: none;
+    visibility: hidden;
+  }
+  .scrollWrapper {
     display: flex;
-    overflow: hidden;
     gap: 32px;
-    margin: 0 var(--margin-width) 40px var(--margin-width);
-    .title {
-        display: none;
-        visibility: hidden;
-    }
+    overflow: hidden
+  }
 }
