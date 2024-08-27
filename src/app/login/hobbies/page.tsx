@@ -4,6 +4,8 @@ import classes from "./page.module.scss";
 import CrossSVG from "./cross.svg";
 import { useState } from "react";
 import Image from "next/image";
+import { PrimaryBtn } from "@/lib/shared";
+import Link from "next/link";
 
 const hobbies = [
   "Бизнес",
@@ -34,14 +36,14 @@ const hobbies = [
 export default function HobbiesPage() {
   const [activeHobbies, setActiveHobbies] = useState<Array<number>>([]);
 
-    function deleteHobbie(index: number) {
+  function deleteHobbie(index: number) {
     setActiveHobbies((current) => current.filter((hobbie) => hobbie !== index));
+  }
+  function addHobbie(index: number) {
+    if (!activeHobbies.includes(index)) {
+      setActiveHobbies([...activeHobbies, index]);
     }
-    function addHobbie(index: number) {
-        if (!activeHobbies.includes(index)) {
-            setActiveHobbies([...activeHobbies, index])
-        }
-    }
+  }
 
   return (
     <div className={classes.wrapper}>
@@ -65,6 +67,21 @@ export default function HobbiesPage() {
             )}
           </button>
         ))}
+      </div>
+      <div className={classes.btns}>
+        <Link href="/login">
+          <button type="button" className={classes.blackWhiteBtn}>
+            Назад
+          </button>
+        </Link>
+        <Link href="/profile">
+          <button type="button" className={classes.SecondaryBtn}>
+            Пропустить
+          </button>
+        </Link>
+        <Link href="/profile">
+          <PrimaryBtn text="Далее" />
+        </Link>
       </div>
     </div>
   );

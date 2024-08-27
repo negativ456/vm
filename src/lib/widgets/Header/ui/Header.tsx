@@ -11,7 +11,7 @@ import { SignInUpModal } from "../../SignInUpModal/ui/SignInUpModal";
 
 export function Header() {
   const isSearchShow = usePathname() !== "/events-map";
-  const [isShowModal, setIsShowModal] = useState(true)
+  const [isShowModal, setIsShowModal] = useState(false)
   
   const showModal = () => setIsShowModal(true)
   const closeModal = () => setIsShowModal(false)

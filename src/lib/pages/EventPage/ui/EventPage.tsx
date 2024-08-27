@@ -16,7 +16,7 @@ import { EventCard } from "@/lib/entities";
 import { BuyTicketsModal } from "@/lib/widgets/BuyTicketsModal/ui/BuyTicketsModal";
 
 const EventPage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 

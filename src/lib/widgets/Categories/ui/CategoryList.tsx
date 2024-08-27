@@ -4,7 +4,7 @@ import { categoryDB } from "../model/categoryDB";
 
 export function CategoryList() {
     return (
-      <section className={classes.wrapper}>
+      <section className={classes.wrapper} id="#categories">
             <h2>Категории</h2>
             <div className={classes.list}>
                 {categoryDB.map((category, index) => (

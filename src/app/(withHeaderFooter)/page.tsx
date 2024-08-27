@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div>
       <RecommendedEvents />
-      <CategoryList />
+      <CategoryList/>
       <MainEvents />
     </div>
   );
