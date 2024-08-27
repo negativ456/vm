@@ -12,6 +12,6 @@ export function CategoryFilter() {
     "Культурные",
     "Культурные",
   ];
-
+  // @ts-ignore
   return <DesignedSelect options={categories} description="Категория" width="128px"/>;
 }

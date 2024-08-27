@@ -10,6 +10,6 @@ export function DateFilter() {
     "5 сентября",
     "6 сентября",
   ];
-
+  // @ts-ignore
   return <DesignedSelect options={dates} description="Дата" width="111px"/>;
 }
