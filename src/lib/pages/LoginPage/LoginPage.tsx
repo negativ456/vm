@@ -1,19 +1,24 @@
-import React from 'react';
-import cls from './LoginPage.module.scss'
+import { PrimaryBtn, SignUpInput } from "@/lib/shared";
+import classes from "./LoginPage.module.scss";
+import Link from "next/link";
 
-const LoginPage = () => {
-    return (
-        <div className={cls.loginPage}>
-            <h1>Создание профиля</h1>
-            <div className={cls.inputs}>
-                <input type="text" placeholder={"Имя*"}/>
-                <input type="text" placeholder={"Фамилия*"}/>
-                <input type="text" placeholder={"Город проживания*"}/>
-                <input type="text" placeholder={"Адрес"}/>
-            </div>
-            <button className={cls.button}>Далее</button>
-        </div>
-    );
-};
-
-export default LoginPage;
+export default function LoginPage() {
+  return (
+    <div className={classes.wrapper}>
+      <h1>Создание профиля</h1>
+      <div className={classes.profileToggle}>
+        <button type="button">Пользователь</button>
+        <button type="button">Организация</button>
+      </div>
+      <div className={classes.inputs}>
+        <SignUpInput type="Имя" />
+        <SignUpInput type="Фамилия" />
+        <SignUpInput type="Город проживания" />
+        <SignUpInput type="Адрес" />
+      </div>
+      <Link className={classes.btnWrapper} href="/login/hobbies">
+        <PrimaryBtn text="Далее" />
+      </Link>
+    </div>
+  );
+}

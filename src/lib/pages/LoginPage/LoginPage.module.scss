@@ -1,38 +1,50 @@
-.loginPage {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.wrapper {
+  width: 384px;
+  margin: 64px auto 0 auto;
   h1 {
     text-align: center;
+    font-feature-settings: "liga" off;
     font-size: 32px;
     font-weight: 600;
     line-height: 40px; /* 125% */
     letter-spacing: -0.32px;
+    margin-bottom: 32px;
   }
-}
-
-.inputs {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  input {
-    color: var(--black-50, #808080);
-    font-size: 16px;
-    line-height: 24px; /* 150% */
-    padding: 16px 12px;
-    border-radius: 8px;
-    border: var(--0, 1px) solid var(--black-20, #CCC);
-    background: var(--surfaces-10, #FFF);
+  .profileToggle {
+    display: flex;
+    margin: 0 auto;
+    width: fit-content;
+    border-radius: 16px;
+    padding: 4px;
+    background: var(
+      --surfaces-40,
+      linear-gradient(
+        0deg,
+        rgba(103, 80, 164, 0.08) 0%,
+        rgba(103, 80, 164, 0.08) 100%
+      ),
+      #fff
+    );
+    button {
+      font-size: 16px;
+      line-height: 24px; /* 150% */
+      padding: 10px 12px;
+      border-radius: 12px;
+    }
+    button:focus {
+      background-color: #fff;
+      color: #0181ef;
+    }
   }
-}
-
-.button {
-  border-radius: 8px;
-  background: var(--primary-50, #0181EF);
-  display: flex;
-  width: 85px;
-  padding: 16px;
-  justify-content: center;
-  align-items: center;
-  gap: 4px;
+  .inputs {
+    margin: 32px 0 127px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .btnWrapper {
+    width: min-content;
+    display: flex;
+    margin: 0 auto;
+  }
 }

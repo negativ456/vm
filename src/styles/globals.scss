@@ -5,9 +5,10 @@
 }
 
 :root {
-  --primary-color: #0181EF;
-  --font-color: #1A1A1A;
+  --primary-color: #0181ef;
+  --font-color: #1a1a1a;
   --margin-width: 80px;
+  --input-border: #e5e5e5;
 }
 
 html {
@@ -25,7 +26,8 @@ html {
 button {
   border: none;
   outline: none;
-  cursor: pointer;;
+  cursor: pointer;
+  background-color: transparent;
 }
 
 a {

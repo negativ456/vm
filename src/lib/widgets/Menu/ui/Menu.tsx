@@ -1,27 +1,32 @@
+"use client"
+
 import Link from "next/link";
-import classes from './Menu.module.scss'
+import classes from "./Menu.module.scss";
+import { usePathname } from "next/navigation";
 
 export function Menu() {
-    return (
-      <nav className={classes.menu}>
-        <Link href="/" className={classes.link}>
-          Категории
-        </Link>
-        <Link href="/" className={classes.link}>
-          Карта мероприятий
-        </Link>
-        <Link href="/" className={classes.link}>
-          Карта мероприятий
-        </Link>
-        <Link href="/" className={classes.link}>
-          Торговая площадка
-        </Link>
-        <Link href="/" className={classes.link}>
-          Создать мероприятие
-        </Link>
-        <Link href="/" className={classes.link}>
-          Soon
-        </Link>
-      </nav>
-    );
+  const marginBottom = usePathname() === '/events-map' ? '16px' : '32px' 
+
+  return (
+    <nav className={classes.menu} style={{ marginBottom }}>
+      <Link href="/" className={classes.link}>
+        Категории
+      </Link>
+      <Link href="/" className={classes.link}>
+        Карта мероприятий
+      </Link>
+      <Link href="/" className={classes.link}>
+        Карта мероприятий
+      </Link>
+      <Link href="/" className={classes.link}>
+        Торговая площадка
+      </Link>
+      <Link href="/" className={classes.link}>
+        Создать мероприятие
+      </Link>
+      <Link href="/" className={classes.link}>
+        Soon
+      </Link>
+    </nav>
+  );
 }

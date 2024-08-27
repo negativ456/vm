@@ -1,0 +1,21 @@
+.wrapper {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  cursor: text;
+  span {
+    display: block;
+    color: #808080;
+    font-size: 12px;
+    line-height: 16px; /* 133.333% */
+    letter-spacing: 0.4px;
+  }
+  input {
+    width: 100%;
+    border: none;
+    outline: none;
+  }
+}
+.wrapper:focus-within {
+    border-color: black;
+}

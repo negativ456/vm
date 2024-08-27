@@ -2,4 +2,7 @@
   display: flex;
   margin: 20px var(--margin-width);
   gap: 24px;
+  .signInBtn {
+    margin: 0 0 0 auto;
+  }
 }

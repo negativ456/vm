@@ -5,5 +5,11 @@ export {
   DesignedSelect,
   Price,
   FavouriteBtn,
-  Rating
+  Rating,
+  DateTime,
+  CartTickets,
+  CustomInput,
+  PayBtn,
+  SignInUpBtn,
+  SignUpInput
 } from "./ui";

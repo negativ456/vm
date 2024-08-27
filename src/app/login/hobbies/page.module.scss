@@ -1,0 +1,33 @@
+.wrapper {
+  margin: 64px 168px 180px 168px;
+  h1 {
+    text-align: center;
+    font-feature-settings: "liga" off;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 40px; /* 125% */
+    letter-spacing: -0.32px;
+    margin-bottom: 32px;
+  }
+  .hobbies {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    .hobbie {
+      padding: 10px 16px;
+      font-size: 16px;
+      line-height: 24px; /* 150% */
+      border-radius: 8px;
+      border: 1px solid #e5e5e5;
+      display: block;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      &.active {
+        background-color: rgba(230, 242, 253, 1);
+        color: rgba(1, 129, 239, 1);
+      }
+    }
+  }
+}
