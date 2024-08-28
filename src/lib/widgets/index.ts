@@ -4,3 +4,4 @@ export { RecommendedEvents } from "./RecommendedEvents";
 export { CategoryList } from "./Categories";
 export { MainEvents } from "./MainEvents";
 export { EventsList } from "./EventsList";
+export {MapWithEvents} from './MapWithEvents'

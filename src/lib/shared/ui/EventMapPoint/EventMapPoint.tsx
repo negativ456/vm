@@ -52,7 +52,7 @@ export function EventMapPoint({
             <Link href="/event">
               <span>{event.type}</span>
             </Link>
-            <Link href="/event">
+            <Link href="/event" className={classes.chevronWrapper}>
               <Image src={ChevronRightSVG} alt="" />
             </Link>
           </div>

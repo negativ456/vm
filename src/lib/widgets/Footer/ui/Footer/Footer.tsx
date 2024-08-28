@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react';
 import cls from './Footer.module.scss'
 import Link from "next/link";
@@ -5,10 +7,15 @@ import appstore from '../../assets/appstore.svg'
 import googleplay from '../../assets/googleplay.svg'
 import rustore from '../../assets/rustore.svg'
 import Image from "next/image";
+import { useAppSelector } from '@/hooks';
 
 const Footer = () => {
+    const isAuth = useAppSelector(state => state.globalSlice.user.isAuth)
+
     return (
-        <div className={cls.wrapper}>
+        <div className={cls.wrapper} style={{
+            marginTop: isAuth ? '0px' : '47px'
+        }}>
             <div className={cls.content}>
                 <div className={cls.row}>
                     <div className={cls.column}>

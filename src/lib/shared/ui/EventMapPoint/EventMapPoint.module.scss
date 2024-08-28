@@ -48,6 +48,10 @@
     gap: 4px;
     margin-top: 4px;
     margin-bottom: 12px;
+    .chevronWrapper {
+      display: flex;
+      align-items: center;
+    }
     span {
       color: var(--primary-50, #0181ef);
       font-size: 16px;
