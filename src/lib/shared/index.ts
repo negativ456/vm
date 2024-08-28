@@ -14,5 +14,6 @@ export {
   EventMapPoint,
   Cashback,
   UserBtn,
-  Slider
+  Slider,
+  CroppedText
 } from "./ui";

@@ -18,6 +18,7 @@ import { PrimaryBtn } from "../PrimaryBtn";
 import { FavouriteBtn } from "../FavouriteBtn";
 import Link from "next/link";
 import { Slider } from "../Slider";
+import { CroppedText } from "../CroppedText";
 
 export function EventMapPoint({
   isActive,
@@ -61,7 +62,9 @@ export function EventMapPoint({
               <Rating rating={4.7} />
             </Link>
           </div>
-          <p className={classes.desc}>{event.description}</p>
+          <div className={classes.desc}>
+            <CroppedText text={event.description} length={100} />
+          </div>
           <div className={classes.contactsInfo}>
             <div className={classes.contact}>
               <Image src={LocationSVG} alt="" />
