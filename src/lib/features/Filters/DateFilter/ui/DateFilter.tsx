@@ -11,5 +11,5 @@ export function DateFilter() {
     "6 сентября",
   ];
 
-  return <DesignedSelect options={dates} description="Дата" width="111px"/>;
+  return <DesignedSelect options={dates} description="Дата"/>;
 }

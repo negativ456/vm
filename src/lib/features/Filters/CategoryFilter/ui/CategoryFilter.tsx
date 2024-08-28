@@ -13,5 +13,5 @@ export function CategoryFilter() {
     "Культурные",
   ];
 
-  return <DesignedSelect options={categories} description="Категория" width="128px"/>;
+  return <DesignedSelect options={categories} description="Категория"/>;
 }
