@@ -13,31 +13,40 @@ import Photo8 from "./photos/8.png";
 
 export function Category({ category, hardcodeIndex }: { category: CategoryType, hardcodeIndex: number }) {
   let photo: StaticImageData | string = ''
+  let text = ''
 
   switch (hardcodeIndex) {
     case 0:
       photo = Photo1;
+      text = 'Общественно-социальные'
       break;
     case 1:
       photo = Photo2;
+      text = "Общественно-социальные";
       break;
     case 2:
       photo = Photo3;
+      text = "Общественно-социальные";
       break;
     case 3:
       photo = Photo4;
+      text = "Общественно-социальные";
       break;
     case 4:
       photo = Photo5;
+      text = "Общественно-социальные";
       break;
     case 5:
       photo = Photo6;
+      text = "Общественно-социальные";
       break;
     case 6:
       photo = Photo7;
+      text = "Общественно-социальные";
       break;
     case 7:
       photo = Photo8;
+      text = "Общественно-социальные";
       break;
     default:
       break;
