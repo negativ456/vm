@@ -1,0 +1,127 @@
+.outer {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  .middle {
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .inner {
+      height: 24px;
+      width: 24px;
+      border-radius: 50%;
+    }
+  }
+}
+.eventInfo {
+  padding: 0 0 16px 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background-color: white;
+  width: 393px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  overflow-y: auto;
+  h2 {
+    margin: 16px 24px 0 24px;
+    color: var(--primary-50, #0181ef);
+    font-feature-settings: "liga" off;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px; /* 116.667% */
+    letter-spacing: -0.24px;
+  }
+  .type {
+    margin: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 4px;
+    margin-bottom: 12px;
+    span {
+      color: var(--primary-50, #0181ef);
+      font-size: 16px;
+      line-height: 24px; /* 150% */
+    }
+  }
+  .avatarRating {
+    margin: 0 24px;
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+    align-items: center;
+  }
+  .contactsInfo {
+    margin: 0 24px;
+    font-size: 16px;
+    line-height: 24px; /* 150% */
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    .contact {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .number {
+      display: flex;
+      align-items: start;
+      gap: 12px;
+      .numbersList {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        .link {
+          color: #0181ef;
+        }
+      }
+      .socialNetworks {
+        display: flex;
+        gap: 11px;
+        .socialNet {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .desc {
+    margin: 0 24px 24px 24px;
+  }
+  .bottom {
+    margin: auto 0 0 0;
+    .price {
+      margin-top: 26px;
+      margin-bottom: 16px;
+      padding-top: 24px;
+      border-top: 1px solid #e5e5e5;
+      .marginWrapper {
+        margin: 0 24px;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        .total {
+          font-feature-settings: "liga" off;
+          font-size: 24px;
+          font-weight: 600;
+          line-height: 28px; /* 116.667% */
+          letter-spacing: -0.24px;
+        }
+      }
+    }
+    .btns {
+      padding: 0 24px;
+      display: flex;
+      gap: 8px;
+    }
+  }
+}

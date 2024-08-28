@@ -21,7 +21,7 @@ export function Menu() {
       <Link href="/" className={classes.link}>
         Создать мероприятие
       </Link>
-      <Link href="/" className={classes.link}>
+      <Link href="/soon" className={classes.link}>
         Soon
       </Link>
     </nav>

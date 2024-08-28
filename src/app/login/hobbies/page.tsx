@@ -6,6 +6,8 @@ import { useState } from "react";
 import Image from "next/image";
 import { PrimaryBtn } from "@/lib/shared";
 import Link from "next/link";
+import { useAppDispatch } from "@/hooks";
+import { changeAuth } from "@/redux/globalSlice";
 
 const hobbies = [
   "Бизнес",
@@ -35,6 +37,8 @@ const hobbies = [
 
 export default function HobbiesPage() {
   const [activeHobbies, setActiveHobbies] = useState<Array<number>>([]);
+
+  const dispatch = useAppDispatch();
 
   function deleteHobbie(index: number) {
     setActiveHobbies((current) => current.filter((hobbie) => hobbie !== index));
@@ -74,12 +78,30 @@ export default function HobbiesPage() {
             Назад
           </button>
         </Link>
-        <Link href="/profile">
+        <Link
+          href="/profile"
+          onClick={() =>
+            dispatch(
+              changeAuth({
+                isAuth: true,
+              })
+            )
+          }
+        >
           <button type="button" className={classes.SecondaryBtn}>
             Пропустить
           </button>
         </Link>
-        <Link href="/profile">
+        <Link
+          href="/profile"
+          onClick={() =>
+            dispatch(
+              changeAuth({
+                isAuth: true,
+              })
+            )
+          }
+        >
           <PrimaryBtn text="Далее" />
         </Link>
       </div>

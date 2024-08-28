@@ -16,6 +16,8 @@ html {
   font-size: 14px;
   color: var(--font-color);
   line-height: 20px;
+  scroll-behavior: smooth;
+  scroll-padding-top: 10px;
 }
 
 .container {
@@ -33,4 +35,11 @@ button {
 a {
   text-decoration: none;
   color: var(--font-color);
+}
+
+//For Swiper library
+.my-custom-pagination-div {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
 }

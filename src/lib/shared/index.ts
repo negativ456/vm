@@ -1,7 +1,6 @@
 export {
   Logo,
   PrimaryBtn,
-  LocationUI,
   DesignedSelect,
   Price,
   FavouriteBtn,
@@ -11,5 +10,10 @@ export {
   CustomInput,
   PayBtn,
   SignInUpBtn,
-  SignUpInput
+  SignUpInput,
+  EventMapPoint,
+  Cashback,
+  UserBtn,
+  Slider,
+  CroppedText
 } from "./ui";

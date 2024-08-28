@@ -30,10 +30,10 @@
       line-height: 24px; /* 150% */
       padding: 10px 12px;
       border-radius: 12px;
-    }
-    button:focus {
-      background-color: #fff;
-      color: #0181ef;
+      &.active {
+        background-color: #fff;
+        color: #0181ef;
+      }
     }
   }
   .inputs {

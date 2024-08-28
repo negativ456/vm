@@ -8,7 +8,8 @@ interface ProfilePageProps {
     isCreator: boolean;
 }
 
-const ProfilePage = ({isCreator}: ProfilePageProps) => {
+const ProfilePage = ({ isCreator }: ProfilePageProps) => {
+    console.log(`isCreator: ${isCreator}`)
     return (
         <section className={cls.container}>
             <div className={cls.profile}>
@@ -16,7 +17,7 @@ const ProfilePage = ({isCreator}: ProfilePageProps) => {
                 <div className={cls.content}>
                     <h3>Денис Давыдов</h3>
                     <div className={cls.content_ad}>
-                        {isCreator ? (
+                        {!isCreator ? (
                             <>
                                 <p>Москва</p>
                                 <p><span>144</span> друга</p>
@@ -28,7 +29,7 @@ const ProfilePage = ({isCreator}: ProfilePageProps) => {
                             <p><span>10</span> событий организовано</p>
                         </>}
                     </div>
-                    <p className={cls.work}>{isCreator ? 'Топ-менеджер Яндекс. Отвечаю за стратегическое планирование, управление проектами и развитие ЯндексПлюс' : 'Frontend-разработчик в Square Solutions'}</p>
+                    <p className={cls.work}>{!isCreator ? 'Топ-менеджер Яндекс. Отвечаю за стратегическое планирование, управление проектами и развитие ЯндексПлюс' : 'Frontend-разработчик в Square Solutions'}</p>
                     <div className={cls.interests}>
                         <div className={cls.interest}>Стартапы</div>
                         <div className={cls.interest}>IT</div>
@@ -36,7 +37,7 @@ const ProfilePage = ({isCreator}: ProfilePageProps) => {
                         <div className={cls.interest}>Технологии</div>
                     </div>
                     <div className={cls.buttons}>
-                        {isCreator ?
+                        {!isCreator ?
                             <button className={cls.add_btn}>Подписаться</button>
                             :
                             <>

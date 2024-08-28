@@ -1,13 +1,11 @@
 .btn {
-    font-size: 16px;
-    color: #FFF;
-    line-height: 24px;
-    background-color: var(--primary-color);
-    padding: 10px 16px;
-    border: none;
-    border-radius: 13px;
-    cursor: pointer;
-    &:hover {
-        opacity: 0.8;
-    }
+  font-size: 16px;
+  line-height: 24px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 13px;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
 }

@@ -1,0 +1,17 @@
+.wrapper {
+  border-radius: 8px;
+  background: radial-gradient(50% 50% at 50% 50%, #2563eb 0%, #46cdeb 100%),
+    #0181ef;
+  display: flex;
+  gap: 1px;
+  padding: 4px;
+  align-items: center;
+  height: min-content;
+  cursor: pointer;
+  span {
+    color: #fff;
+    font-size: 12px;
+    line-height: 16px; /* 133.333% */
+    letter-spacing: 0.4px;
+  }
+}

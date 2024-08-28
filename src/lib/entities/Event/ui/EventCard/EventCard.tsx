@@ -1,5 +1,5 @@
 import classes from "./EventCard.module.scss";
-import Image, {StaticImageData} from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { EventType } from "../../model";
 import { FavouriteBtn, Price, Rating } from "@/lib/shared";
 import Link from "next/link";
@@ -8,6 +8,7 @@ import Photo2 from "./photos/2.webp";
 import Photo3 from "./photos/3.jpg";
 import Photo4 from "./photos/4.jpeg";
 import Photo5 from "./photos/5.webp";
+import { ShortAvatar } from "@/lib/entities/User";
 
 export function EventCard({ event }: { event: EventType }) {
   let image: StaticImageData | string = "";
@@ -34,29 +35,37 @@ export function EventCard({ event }: { event: EventType }) {
   }
 
   return (
-    <Link href={"/event"}>
-      <article className={classes.wrapper}>
-        <div className={classes.imgWrapper}>
+    <article className={classes.wrapper}>
+      <div className={classes.imgWrapper}>
+        <Link href="/event">
           <Image
             src={image}
             alt={`${event.type}. ${event.title}`}
             className={classes.background}
           />
-          <div className={classes.priceFav}>
-            <Price price={event.price} />
-            <FavouriteBtn />
-          </div>
+        </Link>
+        <div className={classes.priceFav}>
+          <Price price={event.price} />
+          <FavouriteBtn />
         </div>
-        <div className={classes.desc}>
+      </div>
+      <div className={classes.desc}>
+        <Link href="/event">
           <h4>{event.title}</h4>
-          <div className={classes.userRating}>
-            <span>{event.creator.fullname}</span>
+        </Link>
+        <div className={classes.userRating}>
+          <ShortAvatar />
+          <Link href="/profile?profile=org">
             <Rating rating={event.rating} />
-          </div>
-          <div>{event.location}</div>
-          <div>{event.datetime.toLocaleDateString()}</div>
+          </Link>
         </div>
-      </article>
-    </Link>
+        <Link href="/event">
+          <div>{event.location}</div>
+        </Link>
+        <Link href="/event">
+          <div>{event.datetime.toLocaleDateString()}</div>
+        </Link>
+      </div>
+    </article>
   );
 }
