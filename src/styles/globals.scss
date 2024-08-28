@@ -36,3 +36,10 @@ a {
   text-decoration: none;
   color: var(--font-color);
 }
+
+//For Swiper library
+.my-custom-pagination-div {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}

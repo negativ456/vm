@@ -8,7 +8,6 @@ import { PrimaryBtn } from "@/lib/shared";
 import Link from "next/link";
 import { useAppDispatch } from "@/hooks";
 import { changeAuth } from "@/redux/globalSlice";
-import { useRouter } from "nextjs-toploader/app";
 
 const hobbies = [
   "Бизнес",
@@ -38,8 +37,6 @@ const hobbies = [
 
 export default function HobbiesPage() {
   const [activeHobbies, setActiveHobbies] = useState<Array<number>>([]);
-
-  const router = useRouter();
 
   const dispatch = useAppDispatch();
 

@@ -13,5 +13,6 @@ export {
   SignUpInput,
   EventMapPoint,
   Cashback,
-  UserBtn
+  UserBtn,
+  Slider
 } from "./ui";

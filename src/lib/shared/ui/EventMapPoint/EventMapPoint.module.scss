@@ -21,7 +21,7 @@
   }
 }
 .eventInfo {
-  padding: 16px 0;
+  padding: 0 0 16px 0;
   position: absolute;
   left: 0;
   top: 0;
@@ -31,8 +31,9 @@
   display: flex;
   flex-direction: column;
   z-index: 1;
+  overflow-y: auto;
   h2 {
-    margin: 0 24px;
+    margin: 16px 24px 0 24px;
     color: var(--primary-50, #0181ef);
     font-feature-settings: "liga" off;
     font-size: 24px;
@@ -95,9 +96,6 @@
   }
   .desc {
     margin: 0 24px 24px 24px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
   }
   .bottom {
     margin: auto 0 0 0;

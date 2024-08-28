@@ -6,8 +6,8 @@ export function Logo() {
   const router = useRouter();
 
   return (
-    <button onClick={() => router.push("/")} className={classes.title}>
+    <Link href={"/"} className={classes.title}>
       вМесте
-    </button>
+    </Link>
   );
 }

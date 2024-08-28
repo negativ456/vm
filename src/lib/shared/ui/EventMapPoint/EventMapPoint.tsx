@@ -17,15 +17,16 @@ import { Cashback } from "../Cashback";
 import { PrimaryBtn } from "../PrimaryBtn";
 import { FavouriteBtn } from "../FavouriteBtn";
 import Link from "next/link";
+import { Slider } from "../Slider";
 
 export function EventMapPoint({
   isActive,
   event,
-  expanded
+  expanded,
 }: {
   isActive?: boolean;
-    event?: EventType;
-  expanded: boolean
+  event?: EventType;
+  expanded: boolean;
 }) {
   const colorBlue = "#0181ef";
   const colorWhite = "#FFF";
@@ -40,7 +41,9 @@ export function EventMapPoint({
   return (
     <>
       {isActive && expanded && event && (
-        <div className={classes.eventInfo}>
+        <div className={classes.eventInfo} onClick={(e) => e.stopPropagation()}>
+          <Slider />
+          <div className="my-custom-pagination-div" />
           <Link href="/event">
             <h2>{event.title}</h2>
           </Link>
@@ -120,7 +123,7 @@ export function EventMapPoint({
             top: y,
             left: x,
             backgroundColor: isActive ? colorWhite : colorBlue,
-            cursor: expanded ? 'pointer' : 'auto'
+            cursor: expanded ? "pointer" : "auto",
           }}
         >
           <div
