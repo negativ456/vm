@@ -45,7 +45,7 @@ export function Header() {
         isBorder={false}
       />
       {isSearchShow && <SearchField height="44px" />}
-      {!isAuth ? (
+      {isAuth ? (
         <div className={classes.auth}>
           <UserBtn type="chat" />
           <UserBtn type="fav" />
