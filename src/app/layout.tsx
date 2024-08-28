@@ -5,6 +5,7 @@ import "@/styles/globals.scss";
 import { inter, golos_text } from "@/fonts";
 import { Provider } from "react-redux";
 import store from "@/redux";
+import NextTopLoader from "nextjs-toploader";
 
 /* export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,6 +20,7 @@ export default function RootLayout({
   return (
     <html lang="ru" className={`${inter.variable} ${golos_text.variable}`}>
       <body id="body">
+        <NextTopLoader />
         <Provider store={store}>{children}</Provider>
       </body>
     </html>

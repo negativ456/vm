@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import Image from "next/image";
 import eventPage from "../assets/event_page.png";
@@ -21,11 +22,13 @@ import {
   FavouriteBtn,
   PrimaryBtn,
 } from "@/lib/shared";
+import { useRouter } from "next/navigation";
 
 const EventPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+  const router = useRouter();
 
   const [freeTicket, setFreeTicket] = useState(0);
   const [vipTicket, setVipTicket] = useState(0);
@@ -49,6 +52,14 @@ const EventPage = () => {
           setVipTicket((current) => current - 1);
         }
       }
+    }
+  }
+
+  function ticketsClick() {
+    if (freeTicket === 0 && vipTicket === 0) {
+      router.push("/event#select-tickets");
+    } else {
+      openModal();
     }
   }
 
@@ -207,14 +218,16 @@ const EventPage = () => {
               <div>
                 <div className={cls.review}>
                   <div className={cls.review_top}>
-                    <div className={cls.avatar}>
-                      <Image
-                        className={cls.avatar_img}
-                        src={avatar}
-                        alt={"avatar"}
-                      ></Image>
-                      <p className={cls.avatar_name}>Данила Горшков</p>
-                    </div>
+                    <Link href="/profile">
+                      <div className={cls.avatar}>
+                        <Image
+                          className={cls.avatar_img}
+                          src={avatar}
+                          alt={"avatar"}
+                        ></Image>
+                        <p className={cls.avatar_name}>Данила Горшков</p>
+                      </div>
+                    </Link>
                     <div className={cls.review_date}>
                       <p>1 июня 2024</p>
                       <div>
@@ -266,9 +279,15 @@ const EventPage = () => {
             </Link>
           </div>
           <div className={cls.buttons}>
-            <Link href="/event#select-tickets">
-              <PrimaryBtn text="Выбрать билеты" padding="16px" />
-            </Link>
+            <PrimaryBtn
+              text={
+                freeTicket === 0 && vipTicket === 0
+                  ? "Выбрать билеты"
+                  : "Купить"
+              }
+              padding="16px"
+              onClick={() => ticketsClick()}
+            />
             <FavouriteBtn type="basic" padding="18px" />
             <button className={cls.button_light}>Найти компанию</button>
             <button className={cls.button_white}>Подарить билет</button>
@@ -278,7 +297,7 @@ const EventPage = () => {
       <div className={cls.block}>
         <div className={cls.more}>
           <h3>Еще события от</h3>
-          <ShortAvatar type="bold"/>
+          <ShortAvatar type="bold" />
         </div>
         <div className={classes.list}>
           {eventsDBSmall.map((event, index) => (

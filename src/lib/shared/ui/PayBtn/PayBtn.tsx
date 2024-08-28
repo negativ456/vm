@@ -3,7 +3,15 @@ import classes from "./PayBtn.module.scss";
 import NewCardSVG from "./icons/Card.svg";
 import SBPSVG from "./icons/SBP.svg";
 
-export function PayBtn({ type }: { type: "SBP" | "New card" }) {
+export function PayBtn({
+  type,
+  active,
+  onClick,
+}: {
+  type: "SBP" | "New card";
+  active: boolean;
+  onClick: () => void;
+}) {
   let svg = "";
   let alt = "";
 
@@ -11,17 +19,24 @@ export function PayBtn({ type }: { type: "SBP" | "New card" }) {
     case "SBP":
       svg = SBPSVG;
       alt = "Оплата по СБП";
-      break
+      break;
     case "New card":
       svg = NewCardSVG;
       alt = "Добавить новую карту";
-      break
+      break;
     default:
       break;
   }
 
   return (
-    <button className={classes.btn} type="submit">
+    <button
+      onClick={onClick}
+      className={classes.btn}
+      type="submit"
+      style={{
+        borderColor: active ? "#0181ef" : "#CCC",
+      }}
+    >
       <Image src={svg} alt={alt} />
     </button>
   );

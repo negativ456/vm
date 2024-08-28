@@ -1,12 +1,9 @@
 .btn {
   padding: 17px 77px;
   cursor: pointer;
-}
-.btn:focus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid;
   border-radius: 8px;
-  border: 2px solid #0181ef;
-}
-.btn:not(:focus) {
-    border-radius: 8px;
-    border: 2px solid white;
 }

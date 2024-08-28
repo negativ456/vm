@@ -64,7 +64,9 @@
         margin-bottom: 16px;
       }
       .pays {
-        display: flex;
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-columns: 1fr 1fr;
         gap: 16px;
         margin-bottom: 64px;
       }

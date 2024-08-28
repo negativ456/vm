@@ -9,15 +9,18 @@ import {
 } from "@/lib/shared";
 import { ModalComp } from "@/lib/shared/ui/ModalComp/ModalComp";
 import { Props } from "react-modal";
+import { useState } from "react";
 
 const tickets = [
   {
     type: "VIP",
-    price: '19 800',
+    price: "19 800",
   },
 ];
 
 export function BuyTicketsModal(props: Props) {
+  const [activePay, setActivePay] = useState<"SBP" | "New card">("SBP");
+
   return (
     <ModalComp
       props={{
@@ -49,11 +52,19 @@ export function BuyTicketsModal(props: Props) {
           <div className={classes.payMethod}>
             <p>Способ оплаты</p>
             <div className={classes.pays}>
-              <PayBtn type="SBP" />
-              <PayBtn type="New card" />
+              <PayBtn
+                type="SBP"
+                onClick={() => setActivePay("SBP")}
+                active={activePay === "SBP"}
+              />
+              <PayBtn
+                type="New card"
+                onClick={() => setActivePay("New card")}
+                active={activePay === "New card"}
+              />
             </div>
           </div>
-          <PrimaryBtn text="Оплатить 19 998 р" fullWidth padding="16px 0"/>
+          <PrimaryBtn text="Оплатить 19 998 р" fullWidth padding="16px 0" />
         </div>
       </div>
     </ModalComp>
