@@ -5,9 +5,14 @@
   padding-top: 16px;
   border-top: 1px solid #e5e5e5;
   border-top: 1px solid var(--black-10, #e5e5e5);
-  .map {
+  .mapWrapper {
     flex: 1;
-    width: 100%;
-    border: none;
+    display: flex;
+    position: relative;
+    .map {
+      flex: 1;
+      width: 100%;
+      border: none;
+    }
   }
 }

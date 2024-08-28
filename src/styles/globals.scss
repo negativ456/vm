@@ -16,6 +16,8 @@ html {
   font-size: 14px;
   color: var(--font-color);
   line-height: 20px;
+  scroll-behavior: smooth;
+  scroll-padding-top: 10px;
 }
 
 .container {

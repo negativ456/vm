@@ -9,5 +9,6 @@ export type EventType = {
     price: string,
     type: string,
     isFavourite: boolean,
-    image: string
+    image: string,
+    description: string
 }

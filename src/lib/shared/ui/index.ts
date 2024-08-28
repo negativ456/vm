@@ -1,6 +1,5 @@
 export { Logo } from "./Logo";
 export { PrimaryBtn } from "./PrimaryBtn";
-export { LocationUI } from "./LocationUI";
 export { DesignedSelect } from "./DesignedSelect";
 export { Price } from "./Price";
 export { FavouriteBtn } from "./FavouriteBtn";
@@ -9,5 +8,8 @@ export { DateTime } from "./DateTime";
 export { CartTickets } from "./CartTickets";
 export { CustomInput } from "./CustomInput";
 export { PayBtn } from "./PayBtn";
-export {SignInUpBtn} from './SignInUpBtn'
-export {SignUpInput} from './SignUpInput'
+export { SignInUpBtn } from './SignInUpBtn'
+export { SignUpInput } from './SignUpInput'
+export {Cashback} from './Cashback'
+export {EventMapPoint} from './EventMapPoint'
+export {UserBtn} from './UserBtn'
