@@ -8,7 +8,7 @@ export function CategoryList() {
       <h2>Категории</h2>
       <div className={classes.list}>
         {categoryDB.map((category, index) => (
-          <Category category={category} key={index} />
+          <Category hardcodeIndex={index} category={category} key={index} />
         ))}
       </div>
     </section>
