@@ -10,7 +10,7 @@ import Photo4 from "./photos/4.webp";
 import Photo5 from "./photos/5.jpg";
 
 export function EventRecommended({ event }: { event: EventType }) {
-  let image: StaticImageData | string = "";
+  /*   let image: StaticImageData | string = "";
 
   switch (Math.floor(Math.random() * 5) + 1) {
     case 1:
@@ -31,13 +31,13 @@ export function EventRecommended({ event }: { event: EventType }) {
     default:
       image = "";
       break;
-  }
+  } */
 
   return (
     <Link href={"/event"}>
       <article className={classes.wrapper}>
         <Image
-          src={image}
+          src={Photo1}
           alt={`${event.type}. ${event.title}`}
           className={classes.background}
         />

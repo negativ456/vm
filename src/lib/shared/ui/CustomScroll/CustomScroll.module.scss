@@ -1,0 +1,10 @@
+.wrapper {
+  width: 100%;
+  height: 10px;
+  background-color: green;
+  .scroll {
+    height: 10px;
+    background-color: red;
+    cursor: pointer;
+  }
+}
