@@ -34,7 +34,7 @@ export function EventRecommended({ event }: { event: EventType }) {
   } */
 
   return (
-    <Link href={"/event"}>
+    <Link href={"/event"} className={classes.link}>
       <article className={classes.wrapper}>
         <Image
           src={Photo1}

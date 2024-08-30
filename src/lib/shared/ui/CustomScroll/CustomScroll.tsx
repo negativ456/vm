@@ -7,10 +7,12 @@ export function CustomScroll({
   setScrollSpace,
   onTranslateXChange,
   scrollWidth,
+  childrenRef,
 }: {
   setScrollSpace: (space: number) => void;
   onTranslateXChange: (delta: number) => void;
   scrollWidth: number;
+  childrenRef: HTMLElement | null;
 }) {
   const isDragging = useRef(false);
   const translateX = useRef(0);
@@ -27,8 +29,35 @@ export function CustomScroll({
       .split(",")[4];
   }
 
+  function moveToClick(e: React.MouseEvent) {
+    if (scrollEl.current && scrollWrapperEl.current) {
+      const mouseDownEvent = new MouseEvent("mousedown", {
+        bubbles: true,
+        cancelable: true,
+        clientX: 0,
+        clientY: 0,
+      });
+      const mouseMoveEvent = new MouseEvent("mousemove", {
+        bubbles: true,
+        cancelable: true,
+        clientX: e.clientX - scrollWrapperEl.current.getBoundingClientRect().x - getElTransform(scrollEl.current) - scrollWidthRef.current / 2,
+        clientY: 0,
+      });
+      const mouseUpEvent = new MouseEvent("mouseup", {
+        bubbles: true,
+        cancelable: true,
+        clientX: 0,
+        clientY: 0,
+      });
+
+      scrollEl.current.dispatchEvent(mouseDownEvent);
+      scrollEl.current.dispatchEvent(mouseMoveEvent);
+      scrollEl.current.dispatchEvent(mouseUpEvent);
+    }
+  }
+
   useEffect(() => {
-    const handleMouseUp = () => {
+    const handleMouseUp = (e: MouseEvent) => {
       isDragging.current = false;
     };
 
@@ -80,8 +109,110 @@ export function CustomScroll({
     }
   }, [scrollWidth]);
 
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault();
+
+      const mouseDownEvent = new MouseEvent("mousedown", {
+        bubbles: true,
+        cancelable: true,
+        clientX: 0,
+        clientY: 0,
+      });
+      const mouseMoveEvent = new MouseEvent("mousemove", {
+        bubbles: true,
+        cancelable: true,
+        clientX: e.deltaY * 0.3, //sensitivity
+        clientY: 0,
+      });
+      const mouseUpEvent = new MouseEvent("mouseup", {
+        bubbles: true,
+        cancelable: true,
+        clientX: 0,
+        clientY: 0,
+      });
+      if (scrollEl.current) {
+        scrollEl.current.dispatchEvent(mouseDownEvent);
+        scrollEl.current.dispatchEvent(mouseMoveEvent);
+        scrollEl.current.dispatchEvent(mouseUpEvent);
+      }
+    };
+
+    childrenRef?.addEventListener("wheel", handleWheel, {
+      passive: false,
+    });
+
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+    };
+  });
+
+  useEffect(() => {
+    const innerEls = childrenRef?.querySelectorAll("*");
+
+    const handleMouseDown = (e: MouseEvent) => {
+      const mouseDownEvent = new MouseEvent("mousedown", {
+        bubbles: true,
+        cancelable: true,
+        clientX: -e.clientX,
+        clientY: 0,
+      });
+      if (scrollEl.current) {
+        scrollEl.current.dispatchEvent(mouseDownEvent);
+      }
+    };
+    const handleMouseMove = (e: MouseEvent) => {
+      if (isDragging.current) {
+        innerEls?.forEach((el) => {
+          if (el instanceof HTMLElement) {
+            el.style.pointerEvents = "none";
+          }
+        });
+      }
+      const mouseMoveEvent = new MouseEvent("mousemove", {
+        bubbles: true,
+        cancelable: true,
+        clientX: -e.clientX,
+        clientY: 0,
+      });
+      if (scrollEl.current) {
+        scrollEl.current.dispatchEvent(mouseMoveEvent);
+      }
+    };
+    const handleMouseUp = () => {
+      const mouseUpEvent = new MouseEvent("mouseup", {
+        bubbles: true,
+        cancelable: true,
+        clientX: 0,
+        clientY: 0,
+      });
+      if (scrollEl.current) {
+        scrollEl.current.dispatchEvent(mouseUpEvent);
+      }
+      innerEls?.forEach((el) => {
+        if (el instanceof HTMLElement) {
+          el.style.pointerEvents = "auto";
+        }
+      });
+    };
+
+    childrenRef?.addEventListener("mousedown", handleMouseDown);
+    childrenRef?.addEventListener("mousemove", handleMouseMove);
+    childrenRef?.addEventListener("mouseup", handleMouseUp);
+
+    return () => {
+      childrenRef?.addEventListener("mousedown", handleMouseDown);
+      childrenRef?.addEventListener("mousemove", handleMouseMove);
+      childrenRef?.addEventListener("mouseup", handleMouseUp);
+    };
+  });
+
   return (
-    <div className={classes.wrapper} ref={scrollWrapperEl}>
+    <div
+      className={classes.wrapper}
+      ref={scrollWrapperEl}
+      onClick={moveToClick}
+    >
       <div
         ref={scrollEl}
         className={classes.scroll}

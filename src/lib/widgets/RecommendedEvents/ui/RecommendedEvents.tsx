@@ -13,6 +13,7 @@ export function RecommendedEvents() {
   const [childrenLength, setChildrenLength] = useState(0);
   const [translateX, setTranslateX] = useState(0);
   const scrollFactor = useRef(0);
+  const [childrenRefReactive, setChildrenRefReactive] = useState<HTMLElement | null>(null);
 
   const handleTranslateXChange = (delta: number) => {
     setTranslateX(-delta * scrollFactor.current);
@@ -27,13 +28,18 @@ export function RecommendedEvents() {
   };
 
   useEffect(() => {
-    if (ancestorRef.current) {
+    const children = childrenRef.current;
+    const ancestor = ancestorRef.current;
+
+    if (ancestor) {
       setAncestorLength(ancestorRef.current.getBoundingClientRect().width);
     }
-    if (childrenRef.current) {
+    if (children) {
       setChildrenLength(childrenRef.current.getBoundingClientRect().width);
+      setChildrenRefReactive(children);
     }
   });
+
   return (
     <section className={classes.wrapper} ref={ancestorRef}>
       {/* Hidden <h2> title for SEO optimization */}
@@ -50,6 +56,7 @@ export function RecommendedEvents() {
         })}
       </div>
       <CustomScroll
+        childrenRef={childrenRefReactive}
         setScrollSpace={setScrollSpace}
         onTranslateXChange={handleTranslateXChange}
         scrollWidth={300}

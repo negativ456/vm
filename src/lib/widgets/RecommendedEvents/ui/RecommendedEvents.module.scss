@@ -8,6 +8,10 @@
   .childrenWrapper {
     display: flex;
     gap: 32px;
-    width: max-content
+    width: max-content;
+    cursor: grab;
+  }
+  .childrenWrapper:active {
+    cursor: grabbing;
   }
 }
