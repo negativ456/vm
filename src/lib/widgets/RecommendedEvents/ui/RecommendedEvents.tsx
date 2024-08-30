@@ -18,15 +18,20 @@ export function RecommendedEvents() {
     setTranslateX(-delta * scrollFactor.current);
   };
 
+  const setScrollSpace = (space: number) => {
+    if (childrenRef.current && ancestorRef.current) {
+      const childrenWidth = childrenRef.current.getBoundingClientRect().width;
+      const ancestorWidth = ancestorRef.current.getBoundingClientRect().width;
+      scrollFactor.current = (childrenWidth - ancestorWidth) / space;
+    }
+  };
+
   useEffect(() => {
     if (ancestorRef.current) {
       setAncestorLength(ancestorRef.current.getBoundingClientRect().width);
     }
     if (childrenRef.current) {
       setChildrenLength(childrenRef.current.getBoundingClientRect().width);
-    }
-    if (ancestorRef.current && childrenRef.current) {
-      scrollFactor.current = childrenLength / ancestorLength;
     }
   });
   return (
@@ -45,8 +50,9 @@ export function RecommendedEvents() {
         })}
       </div>
       <CustomScroll
+        setScrollSpace={setScrollSpace}
         onTranslateXChange={handleTranslateXChange}
-        scrollWidth={(childrenLength / ancestorLength)}
+        scrollWidth={300}
       />
     </section>
   );

@@ -1,12 +1,14 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import classes from "./CustomScroll.module.scss";
 
 export function CustomScroll({
+  setScrollSpace,
   onTranslateXChange,
   scrollWidth,
 }: {
+  setScrollSpace: (space: number) => void;
   onTranslateXChange: (delta: number) => void;
   scrollWidth: number;
 }) {
@@ -71,6 +73,11 @@ export function CustomScroll({
 
   useEffect(() => {
     scrollWidthRef.current = scrollWidth;
+    if (scrollWrapperEl.current) {
+      const wrapperWidth =
+        scrollWrapperEl.current.getBoundingClientRect().width;
+      setScrollSpace(wrapperWidth - scrollWidthRef.current);
+    }
   }, [scrollWidth]);
 
   return (
