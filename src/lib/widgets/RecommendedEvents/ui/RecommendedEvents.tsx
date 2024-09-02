@@ -9,11 +9,10 @@ import { CustomScroll } from "@/lib/shared/ui/CustomScroll/CustomScroll";
 export function RecommendedEvents() {
   const ancestorRef = useRef<HTMLDivElement>(null);
   const childrenRef = useRef<HTMLDivElement>(null);
-  const [ancestorLength, setAncestorLength] = useState(0);
-  const [childrenLength, setChildrenLength] = useState(0);
   const [translateX, setTranslateX] = useState(0);
   const scrollFactor = useRef(0);
-  const [childrenRefReactive, setChildrenRefReactive] = useState<HTMLElement | null>(null);
+  const [childrenRefReactive, setChildrenRefReactive] =
+    useState<HTMLElement | null>(null);
 
   const handleTranslateXChange = (delta: number) => {
     setTranslateX(-delta * scrollFactor.current);
@@ -29,13 +28,7 @@ export function RecommendedEvents() {
 
   useEffect(() => {
     const children = childrenRef.current;
-    const ancestor = ancestorRef.current;
-
-    if (ancestor) {
-      setAncestorLength(ancestorRef.current.getBoundingClientRect().width);
-    }
     if (children) {
-      setChildrenLength(childrenRef.current.getBoundingClientRect().width);
       setChildrenRefReactive(children);
     }
   });

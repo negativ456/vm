@@ -11,7 +11,6 @@ import FacebookSvg from "./icons/fb.svg";
 import LocationSVG from "./icons/location.svg";
 import PhoneSVG from "./icons/phone.svg";
 import TelegramSVG from "./icons/tg.svg";
-import TimeSVG from "./icons/time.svg";
 import VkSVG from "./icons/vk.svg";
 import { Cashback } from "../Cashback";
 import { PrimaryBtn } from "../PrimaryBtn";
