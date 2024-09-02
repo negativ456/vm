@@ -3,7 +3,6 @@
 import { EventRecommended } from "@/lib/entities";
 import classes from "./RecommendedEvents.module.scss";
 import { eventsDB } from "../../../entities/Event/model/eventsDB";
-import { useEffect, useRef, useState } from "react";
 import { CustomScroll } from "@/lib/shared/ui/CustomScroll/CustomScroll";
 import { useScrollSetup } from "@/lib/shared/ui/CustomScroll/hook";
 
