@@ -9,7 +9,6 @@ interface ProfilePageProps {
 }
 
 const ProfilePage = ({ isCreator }: ProfilePageProps) => {
-    console.log(`isCreator: ${isCreator}`)
     return (
         <section className={cls.container}>
             <div className={cls.profile}>

@@ -1,12 +1,17 @@
 .wrapper {
   margin: 0 var(--margin-width) 40px var(--margin-width);
+  overflow: hidden;
   .title {
     display: none;
     visibility: hidden;
   }
-  .scrollWrapper {
+  .childrenWrapper {
     display: flex;
     gap: 32px;
-    overflow: hidden
+    width: max-content;
+    cursor: grab;
+  }
+  .childrenWrapper:active {
+    cursor: grabbing;
   }
 }

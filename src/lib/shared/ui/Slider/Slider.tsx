@@ -20,8 +20,6 @@ export function Slider() {
       className={classes.slider}
       spaceBetween={0}
       slidesPerView={1}
-      onSlideChange={() => console.log("slide change")}
-      onSwiper={(swiper) => console.log(swiper)}
       pagination={{
         el: ".my-custom-pagination-div",
         clickable: true,
