@@ -40,7 +40,11 @@ export function CustomScroll({
       const mouseMoveEvent = new MouseEvent("mousemove", {
         bubbles: true,
         cancelable: true,
-        clientX: e.clientX - scrollWrapperEl.current.getBoundingClientRect().x - getElTransform(scrollEl.current) - scrollWidthRef.current / 2,
+        clientX:
+          e.clientX -
+          scrollWrapperEl.current.getBoundingClientRect().x -
+          getElTransform(scrollEl.current) -
+          scrollWidthRef.current / 2,
         clientY: 0,
       });
       const mouseUpEvent = new MouseEvent("mouseup", {
