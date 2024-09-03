@@ -3,35 +3,18 @@
 import { EventRecommended } from "@/lib/entities";
 import classes from "./RecommendedEvents.module.scss";
 import { eventsDB } from "../../../entities/Event/model/eventsDB";
-import { useEffect, useRef, useState } from "react";
 import { CustomScroll } from "@/lib/shared/ui/CustomScroll/CustomScroll";
+import { useScrollSetup } from "@/lib/shared/ui/CustomScroll/hook";
 
 export function RecommendedEvents() {
-  const ancestorRef = useRef<HTMLDivElement>(null);
-  const childrenRef = useRef<HTMLDivElement>(null);
-  const [translateX, setTranslateX] = useState(0);
-  const scrollFactor = useRef(0);
-  const [childrenRefReactive, setChildrenRefReactive] =
-    useState<HTMLElement | null>(null);
-
-  const handleTranslateXChange = (delta: number) => {
-    setTranslateX(-delta * scrollFactor.current);
-  };
-
-  const setScrollSpace = (space: number) => {
-    if (childrenRef.current && ancestorRef.current) {
-      const childrenWidth = childrenRef.current.getBoundingClientRect().width;
-      const ancestorWidth = ancestorRef.current.getBoundingClientRect().width;
-      scrollFactor.current = (childrenWidth - ancestorWidth) / space;
-    }
-  };
-
-  useEffect(() => {
-    const children = childrenRef.current;
-    if (children) {
-      setChildrenRefReactive(children);
-    }
-  });
+  const [
+    ancestorRef,
+    childrenRef,
+    translateX,
+    childrenRefReactive,
+    handleTranslateXChange,
+    setScrollSpace,
+  ] = useScrollSetup<HTMLDivElement, HTMLDivElement>();
 
   return (
     <section className={classes.wrapper} ref={ancestorRef}>
@@ -49,10 +32,11 @@ export function RecommendedEvents() {
         })}
       </div>
       <CustomScroll
+        visible="onHover"
         childrenRef={childrenRefReactive}
         setScrollSpace={setScrollSpace}
-        onTranslateXChange={handleTranslateXChange}
-        scrollWidth={300}
+        onTranslateChange={handleTranslateXChange}
+        scrollLength={300}
       />
     </section>
   );
