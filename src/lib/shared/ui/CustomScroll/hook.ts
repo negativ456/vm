@@ -6,26 +6,26 @@ type UseScrollSetupReturnType<T extends HTMLElement, S extends HTMLElement> = [
   number,
   S | null,
   (delta: number) => void,
-  (space: number) => void
+  (space: number, direction: 'horizontal' | 'vertical') => void
 ];
 
 export function useScrollSetup<T extends HTMLElement, S extends HTMLElement>(): UseScrollSetupReturnType<T, S> {
   const ancestorRef = useRef<T>(null);
   const childrenRef = useRef<S>(null);
-  const [translateX, setTranslateX] = useState(0);
+  const [translate, setTranslate] = useState(0);
   const scrollFactor = useRef(0);
   const [childrenRefReactive, setChildrenRefReactive] =
     useState<S | null>(null);
 
-  const handleTranslateXChange = (delta: number) => {
-    setTranslateX(-delta * scrollFactor.current);
+  const handleTranslateChange = (delta: number) => {
+    setTranslate(-delta * scrollFactor.current);
   };
 
-  const setScrollSpace = (space: number) => {
+  const setScrollSpace = (space: number, direction: 'horizontal' | 'vertical') => {
     if (childrenRef.current && ancestorRef.current) {
-      const childrenWidth = childrenRef.current.getBoundingClientRect().width;
-      const ancestorWidth = ancestorRef.current.getBoundingClientRect().width;
-      scrollFactor.current = (childrenWidth - ancestorWidth) / space;
+      const childrenLength = childrenRef.current.getBoundingClientRect()[direction === 'horizontal' ? 'width' : 'height'];
+      const ancestorLength = ancestorRef.current.getBoundingClientRect()[direction === 'horizontal' ? 'width' : 'height'];
+      scrollFactor.current = (childrenLength - ancestorLength) / space;
     }
   };
 
@@ -36,5 +36,5 @@ export function useScrollSetup<T extends HTMLElement, S extends HTMLElement>(): 
     }
   });
     
-  return [ancestorRef, childrenRef, translateX, childrenRefReactive, handleTranslateXChange, setScrollSpace]
+  return [ancestorRef, childrenRef, translate, childrenRefReactive, handleTranslateChange, setScrollSpace]
 }

@@ -1,32 +1,39 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { CSSProperties, useEffect, useRef } from "react";
 import classes from "./CustomScroll.module.scss";
 
 export function CustomScroll({
   setScrollSpace,
-  onTranslateXChange,
-  scrollWidth,
+  onTranslateChange,
+  scrollLength,
   childrenRef,
+  direction = "horizontal",
+  styles
 }: {
-  setScrollSpace: (space: number) => void;
-  onTranslateXChange: (delta: number) => void;
-  scrollWidth: number;
+  setScrollSpace: (space: number, direction: "horizontal" | "vertical") => void;
+  onTranslateChange: (delta: number) => void;
+  scrollLength: number;
   childrenRef: HTMLElement | null;
+  direction?: "horizontal" | "vertical";
+  styles?: {
+    wrapper?: CSSProperties;
+    scroll?: CSSProperties
+  };
 }) {
   const isDragging = useRef(false);
-  const translateX = useRef(0);
+  const translate = useRef(0);
   const scrollEl = useRef<HTMLDivElement>(null);
   const scrollWrapperEl = useRef<HTMLDivElement>(null);
-  const scrollWidthRef = useRef(0);
-  const downX = useRef(0);
-  const initScrollX = useRef(0);
+  const scrollLengthRef = useRef(0);
+  const downCoord = useRef(0);
+  const initScrollCoord = useRef(0);
 
   function getElTransform(el: HTMLElement) {
     return +window
       .getComputedStyle(el)
       .transform.match(/matrix.*\((.+)\)/)![1]
-      .split(",")[4];
+      .split(",")[direction === "horizontal" ? 4 : 5];
   }
 
   function moveToClick(e: React.MouseEvent) {
@@ -44,8 +51,14 @@ export function CustomScroll({
           e.clientX -
           scrollWrapperEl.current.getBoundingClientRect().x -
           getElTransform(scrollEl.current) -
-          scrollWidthRef.current / 2,
-        clientY: 0,
+          scrollLengthRef.current / 2,
+        clientY:
+          e.clientY -
+          scrollWrapperEl.current.getBoundingClientRect()[
+            direction === "horizontal" ? "x" : "y"
+          ] -
+          getElTransform(scrollEl.current) -
+          scrollLengthRef.current / 2,
       });
       const mouseUpEvent = new MouseEvent("mouseup", {
         bubbles: true,
@@ -69,13 +82,18 @@ export function CustomScroll({
       if (isDragging.current) {
         if (scrollWrapperEl.current) {
           const wrapperCoords = scrollWrapperEl.current.getBoundingClientRect();
-          const delta = initScrollX.current + event.clientX - downX.current;
+          const delta =
+            initScrollCoord.current +
+            event[direction === "horizontal" ? "clientX" : "clientY"] -
+            downCoord.current;
           if (
             delta >= 0 &&
-            delta <= wrapperCoords.width - scrollWidthRef.current
+            delta <=
+              wrapperCoords[direction === "horizontal" ? "width" : "height"] -
+                scrollLengthRef.current
           ) {
-            onTranslateXChange(delta);
-            translateX.current = delta;
+            onTranslateChange(delta);
+            translate.current = delta;
           }
         }
       }
@@ -83,9 +101,9 @@ export function CustomScroll({
 
     const handleMouseDown = (e: MouseEvent) => {
       isDragging.current = true;
-      downX.current = e.clientX;
+      downCoord.current = direction === "horizontal" ? e.clientX : e.clientY;
       if (scrollEl.current) {
-        initScrollX.current = getElTransform(scrollEl.current);
+        initScrollCoord.current = getElTransform(scrollEl.current);
       }
     };
 
@@ -97,7 +115,7 @@ export function CustomScroll({
 
     return () => {
       if (scrollEl.current) {
-        scrollEl.current.addEventListener("mousedown", handleMouseDown);
+        scrollEl.current.removeEventListener("mousedown", handleMouseDown);
       }
       window.removeEventListener("mouseup", handleMouseUp);
       window.removeEventListener("mousemove", handleMouseMove);
@@ -105,17 +123,20 @@ export function CustomScroll({
   }, []);
 
   useEffect(() => {
-    scrollWidthRef.current = scrollWidth;
+    scrollLengthRef.current = scrollLength;
     if (scrollWrapperEl.current) {
-      const wrapperWidth =
-        scrollWrapperEl.current.getBoundingClientRect().width;
-      setScrollSpace(wrapperWidth - scrollWidthRef.current);
+      const wrapperLength =
+        scrollWrapperEl.current.getBoundingClientRect()[
+          direction === "horizontal" ? "width" : "height"
+        ];
+      setScrollSpace(wrapperLength - scrollLengthRef.current, direction);
     }
-  }, [scrollWidth]);
+  }, [scrollLength]);
 
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
+      const deltaY = e.deltaY * 0.3; //sensitivity
 
       const mouseDownEvent = new MouseEvent("mousedown", {
         bubbles: true,
@@ -126,8 +147,8 @@ export function CustomScroll({
       const mouseMoveEvent = new MouseEvent("mousemove", {
         bubbles: true,
         cancelable: true,
-        clientX: e.deltaY * 0.3, //sensitivity
-        clientY: 0,
+        clientX: deltaY,
+        clientY: deltaY,
       });
       const mouseUpEvent = new MouseEvent("mouseup", {
         bubbles: true,
@@ -159,7 +180,7 @@ export function CustomScroll({
         bubbles: true,
         cancelable: true,
         clientX: -e.clientX,
-        clientY: 0,
+        clientY: -e.clientY,
       });
       if (scrollEl.current) {
         scrollEl.current.dispatchEvent(mouseDownEvent);
@@ -177,7 +198,7 @@ export function CustomScroll({
         bubbles: true,
         cancelable: true,
         clientX: -e.clientX,
-        clientY: 0,
+        clientY: -e.clientY,
       });
       if (scrollEl.current) {
         scrollEl.current.dispatchEvent(mouseMoveEvent);
@@ -211,19 +232,33 @@ export function CustomScroll({
     };
   });
 
+  const wrapperElStyles: CSSProperties = {
+    width: direction === "horizontal" ? "100%" : "4px",
+    height: direction === "horizontal" ? "4px" : "100%",
+    margin: direction === "horizontal" ? "8px 0 0 0" : "0 4px 0 0",
+    ...styles?.wrapper
+  };
+
+  const scrollElStyles: CSSProperties = {
+    height: direction === "horizontal" ? "4px" : `${scrollLength}px`,
+    width: direction === "horizontal" ? `${scrollLength}px` : "4px",
+    transform: `${direction === "horizontal" ? "translateX" : "translateY"}(${
+      translate.current
+      }px)`,
+    ...styles?.scroll
+  };
+
   return (
     <div
       className={classes.wrapper}
       ref={scrollWrapperEl}
       onClick={moveToClick}
+      style={wrapperElStyles}
     >
       <div
         ref={scrollEl}
         className={classes.scroll}
-        style={{
-          width: `${scrollWidth}px`,
-          transform: `translateX(${translateX.current}px)`,
-        }}
+        style={scrollElStyles}
       ></div>
     </div>
   );

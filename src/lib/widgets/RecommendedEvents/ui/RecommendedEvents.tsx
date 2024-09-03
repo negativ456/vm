@@ -34,8 +34,8 @@ export function RecommendedEvents() {
       <CustomScroll
         childrenRef={childrenRefReactive}
         setScrollSpace={setScrollSpace}
-        onTranslateXChange={handleTranslateXChange}
-        scrollWidth={300}
+        onTranslateChange={handleTranslateXChange}
+        scrollLength={300}
       />
     </section>
   );
