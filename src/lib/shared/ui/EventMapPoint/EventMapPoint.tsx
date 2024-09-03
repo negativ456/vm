@@ -61,8 +61,12 @@ export function EventMapPoint({
             childrenRef={childrenRefReactive}
             onTranslateChange={handleTranslateChange}
             setScrollSpace={setScrollSpace}
-            scrollLength={50}
+            scrollLength={400}
             direction="vertical"
+            drag={{
+              draggable: true,
+              showGrabCursor: false
+            }}
             styles={{
               wrapper: {
                 position: "absolute",

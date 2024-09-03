@@ -10,6 +10,11 @@ export function CustomScroll({
   childrenRef,
   direction = "horizontal",
   styles,
+  visible = "visible",
+  drag = {
+    draggable: true,
+    showGrabCursor: true,
+  },
 }: {
   setScrollSpace: (space: number, direction: "horizontal" | "vertical") => void;
   onTranslateChange: (delta: number) => void;
@@ -20,6 +25,11 @@ export function CustomScroll({
     wrapper?: CSSProperties;
     scroll?: CSSProperties;
   };
+  visible?: "visible" | "onHover" | "none";
+  drag?: {
+    draggable: boolean;
+    showGrabCursor?: boolean;
+  };
 }) {
   const isDragging = useRef(false);
   const translate = useRef(0);
@@ -28,6 +38,7 @@ export function CustomScroll({
   const scrollLengthRef = useRef(0);
   const downCoord = useRef(0);
   const initScrollCoord = useRef(0);
+  const isReverse = useRef(false);
 
   function getElTransform(el: HTMLElement) {
     return +window
@@ -76,16 +87,26 @@ export function CustomScroll({
   useEffect(() => {
     const handleMouseUp = () => {
       isDragging.current = false;
+      isReverse.current = false;
     };
 
     const handleMouseMove = (event: MouseEvent) => {
       if (isDragging.current) {
         if (scrollWrapperEl.current) {
           const wrapperCoords = scrollWrapperEl.current.getBoundingClientRect();
-          const delta =
-            initScrollCoord.current +
-            event[direction === "horizontal" ? "clientX" : "clientY"] -
-            downCoord.current;
+          let delta = 0;
+          if (isReverse.current) {
+            delta =
+              -1 *
+              (-initScrollCoord.current +
+                event[direction === "horizontal" ? "clientX" : "clientY"] -
+                downCoord.current);
+          } else {
+            delta =
+              initScrollCoord.current +
+              event[direction === "horizontal" ? "clientX" : "clientY"] -
+              downCoord.current;
+          }
           const end =
             wrapperCoords[direction === "horizontal" ? "width" : "height"] -
             scrollLengthRef.current;
@@ -115,7 +136,9 @@ export function CustomScroll({
       scrollEl.current.addEventListener("mousedown", handleMouseDown);
     }
     window.addEventListener("mouseup", handleMouseUp);
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, {
+      passive: false,
+    });
 
     return () => {
       if (scrollEl.current) {
@@ -177,85 +200,147 @@ export function CustomScroll({
   });
 
   useEffect(() => {
-    const innerEls = childrenRef?.querySelectorAll("*");
+    if (drag.draggable) {
+      const innerEls = childrenRef?.querySelectorAll("*");
 
-    const handleMouseDown = (e: MouseEvent) => {
-      const mouseDownEvent = new MouseEvent("mousedown", {
-        bubbles: true,
-        cancelable: true,
-        clientX: -e.clientX,
-        clientY: -e.clientY,
-      });
-      if (scrollEl.current) {
-        scrollEl.current.dispatchEvent(mouseDownEvent);
-      }
-    };
-    const handleMouseMove = (e: MouseEvent) => {
-      if (isDragging.current) {
-        console.log("drag event");
+      const handleMouseDown = (e: MouseEvent) => {
+        const mouseDownEvent = new MouseEvent("mousedown", {
+          bubbles: true,
+          cancelable: true,
+          clientX: e.clientX,
+          clientY: e.clientY,
+        });
+        if (scrollEl.current) {
+          scrollEl.current.dispatchEvent(mouseDownEvent);
+        }
+      };
+      const handleMouseMove = (e: MouseEvent) => {
+        if (isDragging.current) {
+          isReverse.current = true;
+
+          innerEls?.forEach((el) => {
+            if (el instanceof HTMLElement) {
+              el.style.pointerEvents = "none";
+            }
+          });
+          if (childrenRef) {
+            childrenRef.style.cursor = "grabbing";
+          }
+          const mouseMoveEvent = new MouseEvent("mousemove", {
+            bubbles: true,
+            cancelable: true,
+            clientX: e.clientX,
+            clientY: e.clientY,
+          });
+          if (scrollEl.current) {
+            scrollEl.current.dispatchEvent(mouseMoveEvent);
+          }
+        }
+      };
+      const handleMouseUp = () => {
+        const mouseUpEvent = new MouseEvent("mouseup", {
+          bubbles: true,
+          cancelable: true,
+          clientX: 0,
+          clientY: 0,
+        });
+        if (scrollEl.current) {
+          scrollEl.current.dispatchEvent(mouseUpEvent);
+        }
         innerEls?.forEach((el) => {
           if (el instanceof HTMLElement) {
-            el.style.pointerEvents = "none";
+            el.style.pointerEvents = "auto";
           }
         });
-      }
-      const mouseMoveEvent = new MouseEvent("mousemove", {
-        bubbles: true,
-        cancelable: true,
-        clientX: -e.clientX,
-        clientY: -e.clientY,
-      });
-      if (scrollEl.current) {
-        scrollEl.current.dispatchEvent(mouseMoveEvent);
-      }
-    };
-    const handleMouseUp = () => {
-      const mouseUpEvent = new MouseEvent("mouseup", {
-        bubbles: true,
-        cancelable: true,
-        clientX: 0,
-        clientY: 0,
-      });
-      if (scrollEl.current) {
-        scrollEl.current.dispatchEvent(mouseUpEvent);
-      }
-      innerEls?.forEach((el) => {
-        if (el instanceof HTMLElement) {
-          el.style.pointerEvents = "auto";
+        if (childrenRef) {
+          if (drag.showGrabCursor) {
+            childrenRef.style.cursor = "grab";
+          } else childrenRef.style.cursor = "auto";
         }
-      });
-    };
+      };
 
-    childrenRef?.addEventListener("mousedown", handleMouseDown);
-    childrenRef?.addEventListener("mousemove", handleMouseMove);
-    childrenRef?.addEventListener("mouseup", handleMouseUp);
-
-    return () => {
       childrenRef?.addEventListener("mousedown", handleMouseDown);
-      childrenRef?.addEventListener("mousemove", handleMouseMove);
+      childrenRef?.addEventListener("mousemove", handleMouseMove, {
+        passive: false,
+      });
       childrenRef?.addEventListener("mouseup", handleMouseUp);
-    };
+
+      return () => {
+        childrenRef?.removeEventListener("mousedown", handleMouseDown);
+        childrenRef?.removeEventListener("mousemove", handleMouseMove);
+        childrenRef?.removeEventListener("mouseup", handleMouseUp);
+      };
+    }
   });
 
+  useEffect(() => {
+    const wrapper = scrollWrapperEl.current;
+    if (wrapper) {
+      if (visible === "onHover") {
+        const onMouseEnter = () => {
+          wrapper.style.opacity = "1";
+          wrapper.style.transition = "opacity 0.5s ease";
+        };
+        const onMouseLeave = () => {
+          wrapper.style.opacity = "0";
+        };
+
+        childrenRef?.addEventListener("mouseenter", onMouseEnter);
+        childrenRef?.addEventListener("mouseleave", onMouseLeave);
+        scrollWrapperEl.current.addEventListener("mouseenter", onMouseEnter);
+        scrollWrapperEl.current.addEventListener("mouseleave", onMouseLeave);
+
+        return () => {
+          childrenRef?.removeEventListener("mouseenter", onMouseEnter);
+          childrenRef?.removeEventListener("mouseleave", onMouseLeave);
+          if (scrollWrapperEl.current) {
+            scrollWrapperEl.current.removeEventListener(
+              "mouseenter",
+              onMouseEnter
+            );
+            scrollWrapperEl.current.removeEventListener(
+              "mouseleave",
+              onMouseLeave
+            );
+          }
+        };
+      }
+      if (visible === "none") {
+        wrapper.style.opacity = "0";
+      }
+    }
+  });
+
+  useEffect(() => {
+    if (drag.showGrabCursor) {
+      if (childrenRef) {
+        console.log("set to grab");
+        childrenRef.style.cursor = "grab";
+      }
+    }
+  }, [childrenRef]);
+
   const wrapperElStyles: CSSProperties = {
+    ...styles?.wrapper,
     width: direction === "horizontal" ? "100%" : "4px",
     height: direction === "horizontal" ? "4px" : "100%",
-    margin: direction === "horizontal" ? "8px 0 0 0" : "0 4px 0 0",
-    ...styles?.wrapper,
+    padding: direction === "horizontal" ? "8px 0 0 0" : "0 4px 0 0",
   };
 
   const scrollElStyles: CSSProperties = {
+    ...styles?.scroll,
     height: direction === "horizontal" ? "4px" : `${scrollLength}px`,
     width: direction === "horizontal" ? `${scrollLength}px` : "4px",
     transform: `${direction === "horizontal" ? "translateX" : "translateY"}(${
       translate.current
     }px)`,
-    ...styles?.scroll,
   };
 
   return (
     <div
-      className={classes.wrapper}
+      className={`${classes.wrapper} ${
+        visible === "onHover" ? classes.transparent : ""
+      }`}
       ref={scrollWrapperEl}
       onClick={moveToClick}
       style={wrapperElStyles}

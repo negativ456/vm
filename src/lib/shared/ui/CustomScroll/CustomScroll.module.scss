@@ -1,8 +1,12 @@
 .wrapper {
+  box-sizing: content-box;
   background: transparent;
   cursor: pointer;
   .scroll {
     border-radius: 4px;
     background: #b3b3b3;
   }
+}
+.transparent {
+  opacity: 0;
 }

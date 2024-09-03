@@ -32,6 +32,7 @@ export function RecommendedEvents() {
         })}
       </div>
       <CustomScroll
+        visible="onHover"
         childrenRef={childrenRefReactive}
         setScrollSpace={setScrollSpace}
         onTranslateChange={handleTranslateXChange}
