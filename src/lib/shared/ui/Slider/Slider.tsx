@@ -23,7 +23,7 @@ export function Slider() {
       pagination={{
         el: ".my-custom-pagination-div",
         clickable: true,
-        renderBullet: (className) => {
+        renderBullet: (index, className) => {
           return (
             '<span style="background-color: #1A1A1A" class="' +
             className +

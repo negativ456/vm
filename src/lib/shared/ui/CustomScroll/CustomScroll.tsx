@@ -9,7 +9,7 @@ export function CustomScroll({
   scrollLength,
   childrenRef,
   direction = "horizontal",
-  styles
+  styles,
 }: {
   setScrollSpace: (space: number, direction: "horizontal" | "vertical") => void;
   onTranslateChange: (delta: number) => void;
@@ -18,7 +18,7 @@ export function CustomScroll({
   direction?: "horizontal" | "vertical";
   styles?: {
     wrapper?: CSSProperties;
-    scroll?: CSSProperties
+    scroll?: CSSProperties;
   };
 }) {
   const isDragging = useRef(false);
@@ -86,14 +86,18 @@ export function CustomScroll({
             initScrollCoord.current +
             event[direction === "horizontal" ? "clientX" : "clientY"] -
             downCoord.current;
-          if (
-            delta >= 0 &&
-            delta <=
-              wrapperCoords[direction === "horizontal" ? "width" : "height"] -
-                scrollLengthRef.current
-          ) {
+          const end =
+            wrapperCoords[direction === "horizontal" ? "width" : "height"] -
+            scrollLengthRef.current;
+          if (delta >= 0 && delta <= end) {
             onTranslateChange(delta);
             translate.current = delta;
+          } else if (delta < 0) {
+            onTranslateChange(0);
+            translate.current = 0;
+          } else {
+            onTranslateChange(end);
+            translate.current = end;
           }
         }
       }
@@ -188,6 +192,7 @@ export function CustomScroll({
     };
     const handleMouseMove = (e: MouseEvent) => {
       if (isDragging.current) {
+        console.log("drag event");
         innerEls?.forEach((el) => {
           if (el instanceof HTMLElement) {
             el.style.pointerEvents = "none";
@@ -236,7 +241,7 @@ export function CustomScroll({
     width: direction === "horizontal" ? "100%" : "4px",
     height: direction === "horizontal" ? "4px" : "100%",
     margin: direction === "horizontal" ? "8px 0 0 0" : "0 4px 0 0",
-    ...styles?.wrapper
+    ...styles?.wrapper,
   };
 
   const scrollElStyles: CSSProperties = {
@@ -244,8 +249,8 @@ export function CustomScroll({
     width: direction === "horizontal" ? `${scrollLength}px` : "4px",
     transform: `${direction === "horizontal" ? "translateX" : "translateY"}(${
       translate.current
-      }px)`,
-    ...styles?.scroll
+    }px)`,
+    ...styles?.scroll,
   };
 
   return (
