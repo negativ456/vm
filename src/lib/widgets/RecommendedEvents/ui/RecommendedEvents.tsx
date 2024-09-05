@@ -7,14 +7,8 @@ import { CustomScroll } from "@/lib/shared/ui/CustomScroll/CustomScroll";
 import { useScrollSetup } from "@/lib/shared/ui/CustomScroll/hook";
 
 export function RecommendedEvents() {
-  const [
-    ancestorRef,
-    childrenRef,
-    translateX,
-    childrenRefReactive,
-    handleTranslateXChange,
-    setScrollSpace,
-  ] = useScrollSetup<HTMLDivElement, HTMLDivElement>();
+  const [ancestorRef, childrenRef, translateX, setTranslateX] =
+    useScrollSetup<HTMLDivElement, HTMLDivElement>();
 
   return (
     <section className={classes.wrapper} ref={ancestorRef}>
@@ -32,11 +26,11 @@ export function RecommendedEvents() {
         })}
       </div>
       <CustomScroll
-        visible="onHover"
-        childrenRef={childrenRefReactive}
-        setScrollSpace={setScrollSpace}
-        onTranslateChange={handleTranslateXChange}
+        ancestorRef={ancestorRef.current}
+        childrenRef={childrenRef.current}
         scrollLength={300}
+        setTranslate={setTranslateX}
+        visible="onHover"
       />
     </section>
   );
