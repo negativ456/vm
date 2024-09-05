@@ -38,10 +38,8 @@ export function EventMapPoint({
   const [
     ancestorRef,
     childrenRef,
-    translate,
-    childrenRefReactive,
-    handleTranslateChange,
-    setScrollSpace,
+    translateY,
+    setTranslateY
   ] = useScrollSetup<HTMLDivElement, HTMLDivElement>();
 
   useEffect(() => {
@@ -58,9 +56,9 @@ export function EventMapPoint({
           ref={ancestorRef}
         >
           <CustomScroll
-            childrenRef={childrenRefReactive}
-            onTranslateChange={handleTranslateChange}
-            setScrollSpace={setScrollSpace}
+            ancestorRef={ancestorRef.current}
+            childrenRef={childrenRef.current}
+            setTranslate={setTranslateY}
             scrollLength={400}
             direction="vertical"
             drag={{
@@ -78,7 +76,7 @@ export function EventMapPoint({
             className={classes.scrollWrapper}
             ref={childrenRef}
             style={{
-              transform: `translateY(${translate}px)`,
+              transform: `translateY(${translateY}px)`,
             }}
           >
             <Slider />
